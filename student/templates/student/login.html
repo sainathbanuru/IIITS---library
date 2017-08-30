@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+
+        {% load staticfiles %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Library | IIITS </title>
+
+        <!-- Bootstrap -->
+        <link href="{% static 'js/bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link href="{% static 'js/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+        
+        <!-- NProgress -->
+        <link href="{% static 'js/nprogress/nprogress.css'%}" rel="stylesheet">
+        
+        <!-- Animate.css -->
+        <link href="{% static 'js/animate.css/animate.min.css'%}" rel="stylesheet">
+        
+        <!-- Custom Theme Style -->
+        <link href="{% static 'css/custom.min.css'%}" rel="stylesheet">
+        
+
+    </head>
+
+    <body class="login">
+        
+        <div>
+        
+            <a class="hiddenanchor" id="signup"></a>
+            <a class="hiddenanchor" id="signin"></a>
+
+            <div class="login_wrapper">
+                <div class="animate form login_form">
+                
+                    <section class="login_content">
+                  
+                        <form action="{% url 'login_user' %}" method="post" name="login_user">
+                            {% csrf_token %}
+                            <h1>Login Form</h1>
+                            {% if error_message %}
+                                <p style="color: darkred;"><span class="glyphicon glyphicon-remove"></span>&nbsp; &nbsp;{{ error_message }}</p>
+                            {% endif %}
+                            <div>
+                                <input type="text" class="form-control" name="email" placeholder="Username" required="" />
+                            </div>
+                          
+                            <div>
+                                <input type="password" class="form-control" name="pass" placeholder="Password" required="" />
+                            </div>
+                          
+                            <div>
+                                <button type="submit" class="btn btn-default submit" >Log in</button>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="separator">
+                                
+                                <p class="change_link">
+                                    <strong style="font-size: 2em">IIIT-Chittoor, Sri City</strong>
+                                    <br><span style="font-size: 10px;">Use your Ldap credentials to login</span>
+                                </p>
+                                
+                                <div class="clearfix"></div>
+                                <br />
+
+                            </div>
+
+                        </form>
+                   
+                    </section>
+                
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
