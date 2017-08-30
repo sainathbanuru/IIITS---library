@@ -26,7 +26,6 @@ import time
 
 
 # Create your views here.
-
 class index(TemplateView):
 
 	template_name = 'student/index.html'
@@ -80,13 +79,17 @@ class login_user(TemplateView):
 				roll_no = ''.join([i for i in roll_no if i in "0123456789"])
 
 				# print(str(ldap_user)+" is authenticated")
+
 				AUTH_LDAP_USER_SEARCH = LDAPSearch("OU=prof,OU=people,DC=iiits,DC=in",
 												   ldap.SCOPE_SUBTREE, "(uid=%(ldap_user)s)")
 
 				directory = backend.LDAPBackend.populate_user(ldap_backend, username).ldap_user.attrs['homedirectory'][
 					0]
+				print directory
 
 				path = directory.split('/')
+
+				print path
 				if "next" in request.POST:
 					return HttpResponse(request.POST['next'])
 
@@ -102,10 +105,9 @@ class login_user(TemplateView):
 				return render(request, self.template_name, context)
 
 
-
 		else:
 
-			context["error_message"] = 'Invalid login'
+			context["error_message"] = 'Invalid login credentials'
 			return render(request, self.template_name, context)
 
 		return render(request, self.template_name, context)

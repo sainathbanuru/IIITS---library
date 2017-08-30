@@ -27,7 +27,7 @@ SECRET_KEY = 'ft4!vw(=mbf3th0151z0i#yy2z+7$=31_pwy0kr1tyx8o1$zrq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '10.0.3.223']
 
 
 # Application definition
