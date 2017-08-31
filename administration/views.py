@@ -95,5 +95,8 @@ class bookList(TemplateView):
     context = {}
 
     def get(self, request, *args, **kwargs):
+
+        self.context['books'] = bookDetails.objects.all()
+
         return render(request, self.template_name, self.context)
 

@@ -74,7 +74,7 @@ class login_user(TemplateView):
 
 		if ldap_user is not None:
 			if ldap_user.is_active:
-
+				print "s"
 				roll_num = backend.LDAPBackend.populate_user(ldap_backend, username).ldap_user.attrs['gecos'][0]
 				roll_no = ''.join([i for i in roll_no if i in "0123456789"])
 
@@ -85,11 +85,11 @@ class login_user(TemplateView):
 
 				directory = backend.LDAPBackend.populate_user(ldap_backend, username).ldap_user.attrs['homedirectory'][
 					0]
-				print directory
+				#print directory
 
 				path = directory.split('/')
 
-				print path
+				#print path
 				if "next" in request.POST:
 					return HttpResponse(request.POST['next'])
 
@@ -106,7 +106,7 @@ class login_user(TemplateView):
 
 
 		else:
-
+			print "no"
 			context["error_message"] = 'Invalid login credentials'
 			return render(request, self.template_name, context)
 
