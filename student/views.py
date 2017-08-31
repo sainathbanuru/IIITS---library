@@ -52,15 +52,12 @@ class login_user(TemplateView):
 
 	def post(self, request, *args, **kwargs):
 		context = {}
-		print "\n\n\n\n\n\n\nFFFFFFFFFF\n\n\n"
 
 		if "?next" in request.POST:
 			return HttpResponse(request.POST['next'])
 
 		username = request.POST['email']
 		password = request.POST['pass']
-
-		print "\n\n\n\n\n\n\nFFFFFFFFFF\n\n\n"
 
 		user = authenticate(username=username, password=password)
 
@@ -76,7 +73,7 @@ class login_user(TemplateView):
 			if ldap_user.is_active:
 				print "s"
 				roll_num = backend.LDAPBackend.populate_user(ldap_backend, username).ldap_user.attrs['gecos'][0]
-				roll_no = ''.join([i for i in roll_no if i in "0123456789"])
+				roll_no = ''.join([i for i in roll_num if i in "0123456789"])
 
 				# print(str(ldap_user)+" is authenticated")
 
@@ -118,4 +115,11 @@ def logout_user(request):
 
     logout(request)
     return HttpResponseRedirect('/login')
+
+
+def teams3(request):
+
+	template_name = 'student/teamS3.html'
+	context = {}
+	return render(request,template_name, context)
 
