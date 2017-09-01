@@ -39,3 +39,7 @@ class add_book_form(forms.Form):
 
     #number_of_copies
     noc = IntegerField(widget=TextInput(attrs={'class' : 'form-control','id':'noc'}), initial=1)
+
+
+class bookDetailsAccn(forms.Form):
+    accn = CharField(widget=TextInput(attrs={'class' : 'form-control','id':'accn'}))
