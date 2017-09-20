@@ -68,14 +68,17 @@
                 <ul class="nav side-menu">
                   <li><a href="{% url 'index' %}"><i class="fa fa-home"></i> Home </a>
                   </li>
-                  <li><a href="{% url 'issue' %}"><i class="fa fa-edit"></i> Issue a book </a>
-                  </li>
                   <li><a href="{% url 'add_book' %}"><i class="fa fa-desktop"></i> Add a book </a>
-                  </li>
-                  <li><a href="{% url 'bookList' %}"><i class="fa fa-table"></i> List of books </a>
                   </li>
                   <li><a href="{% url 'bookUpdate' %}"><i class="fa fa-book"></i> Update a book </a>
                   </li>
+                  <li><a href="{% url 'bookList' %}"><i class="fa fa-table"></i> List of books </a>
+                  </li>
+                  <li><a href="{% url 'issue_book' %}"><i class="fa fa-edit"></i> Issue a book </a>
+                  </li>
+                  <li><a href="{% url 'book_return' %}"><i class="fa fa-book"></i> Return a book </a>
+                  </li>
+                  
                 </ul>
               </div>
             </div>
@@ -205,7 +208,13 @@
         <!-- /footer content -->
     </div>
 
+
+
+
+
     <script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
     <!-- Bootstrap -->
     <script src="{% static 'js/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!-- FastClick -->
@@ -245,6 +254,38 @@
     <!-- Custom Theme Scripts -->
     <script src="{% static 'js/custom/custom.min.js'%}"></script>
 
+    <script>
+        $(document).ready(function(){
+         // Gets called as soon as DOM is ready
+         //code here
+
+        });
+
+        jQuery(function() {
+
+            $("#accn").on('keyup', function(){
+                //window.location = "http://www.google.com";
+
+                var value = $(this).val();
+                $.ajax({
+                    url: "{% url 'ajax_autocomplete' %}",
+                    data: {
+                      'search': value
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+
+                        list = data.list;
+                        console.log(list);
+                        $("#accn").autocomplete({
+                        source: list,
+                        minLength: 1
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
   </body>
 </html>

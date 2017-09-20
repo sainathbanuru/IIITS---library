@@ -26,6 +26,7 @@ import time
 
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class index(TemplateView):
 
 	template_name = 'student/index.html'

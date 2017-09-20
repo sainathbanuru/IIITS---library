@@ -6,102 +6,154 @@
 
     <div class="container" role="main">
         <div class="row">
-          <div class="col-md-5 col-sm-12 col-xs-12">
-              <div class="title_left" style="text-align: center">
-                <p style="font-size: 1.2em">Enter Accn. No to update a book : </p>
-              </div>
-          </div>
-          <div class="title_right">
-            <form method="post" action="{% url 'bookUpdate' %}">
-                {% csrf_token %}
-            <div class="col-md-5 col-sm-12 col-xs-12 form-group top_search">
-              <div class="input-group">
-                {{ form.accn }}
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="submit">Go!</button>
-                </span>
-              </div>
+            
+            <div class="col-md-5 col-sm-12 col-xs-12">
+                <div class="title_left" style="text-align: center">
+                    <p style="font-size: 1.2em">Enter Accn. No to update a book : </p>
+                </div>
             </div>
-            </form>
-          </div>
+
+            <div class="title_right">
+              
+                <form method="post" action="{% url 'bookUpdate' %}">
+                    
+                    {% csrf_token %}
+                    <div class="col-md-5 col-sm-12 col-xs-12 form-group top_search">
+                        <div class="input-group">
+                            
+                            {{ form.accn }}
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="submit">Go!</button>
+                            </span>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
 
         </div>
     </div>
+
+
+
+    {% if success %}
+
+        <br><br>
+        <div  class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4 green">
+            <strong><h2>Book updated successfully !!</h2></strong>
+        </div>
+
+    {% endif %}
+
+
+    {% if error_message %}
+
+        <div class=" col-md-6 col-sm-6 col-xs-12 col-md-offset-6 red ">
+            <strong> * &nbsp; {{ error_message }}</strong>
+        </div>
+
+    {% endif %}
+
+
 
     {% if bookDetails %}
+
+   
         <div class="clearfix"></div>
+
         <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Book Details</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
 
-              {% if error_message %}
+                    <div class="x_title">
+                      
+                        <h2>Book Details</h2>
+                        
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </ul>
+                        
+                        <div class="clearfix"></div>
 
-                    <div class=" col-md-6 col-sm-6 col-xs-12 col-md-offset-6 red ">
-                        <strong> * &nbsp; {{ error_message }}</strong>
                     </div>
 
-              {% endif %}
+
+                    <div class="x_content">
+                              
+                        
+                        <div class="col-md-2 col-md-offset-1 col-sm-12 collapse-link-xs-4" style="margin-top: 0px;">
+                            <div class="product-image">
+                                <img src="http://images.amazon.com/images/P/{{ isbn }}.01.20TRZZZZ.jpg" alt="Cover Image" class="img-responsive">
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-6 col-sm-8 col-xs-12" style="border:0px solid #e5e5e5;">
+                        
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{% url 'bookDetailsUpdate' accn  %}" method="post" id="add_book">
+                            
+                                {% csrf_token %}
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-5 col-sm-5 col-xs-12" for="title">Book Title <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12" >
+                                        {{ bookForm.title }}
+                                    </div>
+                                </div>
 
 
-              {% if success %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-5 col-sm-5 col-xs-12" for="author">Author <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ bookForm.author }}
+                                    </div>
+                                </div>
 
-                    <div  class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6 green">
-                        <strong>Book(s) added successfully !!</strong>
+
+                                <div class="form-group">
+                                    <label for="isbn" class="control-label col-md-5 col-sm-5 col-xs-12">ISBN <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ bookForm.isbn }}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">Accn. No  <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ bookForm.accn }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        {{ bookForm.prev_accn }}
+                                    </div>
+                                </div>
+
+
+                                <div class="ln_solid"></div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                        </div>
                     </div>
-
-              {% endif %}
-
-              <div class="x_content">
-                        <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{% url 'bookDetailsUpdate' accn  %}" method="post" id="add_book">
-                              {% csrf_token %}
-                              <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="title">Book Title <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12" >
-                                    {{ bookForm.title }}
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="author">Author <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    {{ bookForm.author }}
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="isbn" class="control-label col-md-5 col-sm-5 col-xs-12">ISBN <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    {{ bookForm.isbn }}
-                                </div>
-                              </div>
-
-                              <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">Accn. No  <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    {{ bookForm.accn }}
-                                </div>
-                              </div>
-                              <div class="ln_solid"></div>
-                              <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                              </div>
-                        </form>
-                  </div>
+                </div>
             </div>
-          </div>
         </div>
-    </div>
+
     {% endif %}
 
 

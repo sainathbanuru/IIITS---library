@@ -6,4 +6,5 @@ from django.contrib import admin
 # Register your models here.
 
 
-admin.site.register(bookDetails)
+admin.site.register(book)
+admin.site.register(issue)

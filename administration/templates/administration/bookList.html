@@ -3,49 +3,57 @@
 {% block page_content %}
 
     <div class="row">
-              <div class="col-md-12">
-                <div class="x_panel">
-                  <div class="x_content">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
                     <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
-                      </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center"></div>
 
-                      <div class="clearfix"></div>
+                        <div class="clearfix"></div>
 
-                    {% for book in books  %}
+                        {% for book in books  %}
 
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-md-12 col-sm-12 col-xs-12">
-                            <h4 class="brief"><i>{{ book.title }}</i></h4>
-                            <div class="left col-xs-7">
-                              <h2>{{ book.author }}</h2>
-                              <p><strong>ISBN : </strong> {{ book.isbn }} </p>
-                              <p><strong>Accn. No : </strong> {{ book.accn }} </p>
+                            <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                <div class="well profile_view">
+                                    
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                  
+                                        <h4 class="brief"><i>{{ book.title }}</i></h4>
+                                    
+                                        <div class="left col-xs-7">
+                                    
+                                            <h2>{{ book.author }}</h2>
+                                            <p><strong>ISBN : </strong> {{ book.isbn }} </p>
+                                            <p><strong>Accn. No : </strong> {{ book.accn }} </p>
 
+                                        </div>
+
+                                        <div class="right col-xs-5 text-center">
+                                            
+                                            <img src="http://images.amazon.com/images/P/{{ book.isbn }}.01.20TRZZZZ.jpg" alt="Cover Image" class="img-responsive">
+
+                                        </div>
+
+                                    </div>
+                                  
+                                    <div class="col-xs-12 bottom text-center">
+
+                                        <div class="col-xs-12 col-sm-6 emphasis">
+                                              <p><strong>Availability : </strong> {{ book.status }} </p>
+                                        </div>
+
+                                    </div>
+                            
+                                </div>
                             </div>
+                        
+                        {% endfor %}
 
-                            <div class="right col-xs-5 text-center">
-                              <img src="http://images.amazon.com/images/P/0070681880.01.20TRZZZZ.jpg    " alt="Cover Image" class="img-responsive">
-                            </div>
-
-                          </div>
-                          <div class="col-xs-12 bottom text-center">
-
-                            <div class="col-xs-12 col-sm-6 emphasis">
-                                  <p><strong>Availability : </strong> {{ book.status }} </p>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    {% endfor %}
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
+    </div>
+
 {% endblock %}

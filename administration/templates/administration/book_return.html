@@ -1,0 +1,210 @@
+{% extends 'student/base.html' %}
+
+{% block page_content %}
+    
+
+
+
+    {% if second_time %}
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+
+                            <div class="x_title">
+                                <h2>Return a book</h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            
+                            {% if error_message %}
+
+                                <div class=" col-md-6 col-sm-6 col-xs-12 col-md-offset-5 red ">
+                                    <strong> * &nbsp; {{ error_message }}</strong>
+                                </div>
+
+                            {% endif %}
+
+                            {% if days_delayed %}
+
+                                <div class=" col-md-6 col-sm-6 col-xs-12 col-md-offset-5 red ">
+                                    * &nbsp; Book is supposed to be returned <strong> {{ days_delayed }} </strong> before
+                                </div>
+
+                            {% endif %}
+
+
+
+
+                            <div class="x_content">
+
+                                <div class="col-md-3 col-sm-3 collapse-link-xs-3" style="margin-top: 60px;">
+                                    <div class="product-image">
+                                        <img src="http://images.amazon.com/images/P/{{ isbn }}.01.20TRZZZZ.jpg" alt="Cover Image" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9 col-sm-9 col-xs-12" style="border:0px solid #e5e5e5;">
+                                    
+                                    <h3 class="prod_title">Details of issue</h3>
+                                    
+
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{% url 'book_return' %}" method="post" id="issue">
+                                            
+                                        {% csrf_token %}
+                                        
+                                        <div class="form-group">
+                                            
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="student_rollno">
+                                                Student Roll No: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12" >
+                                                {{ form.student_rollno }}
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                        
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="title">   Book title: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form.title }}
+                                            </div>
+                                        
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="author">  Author: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form.author }}
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">    Accn. No: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form.accn }}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">    Issue date: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form.issue_date }}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">    Intended Return date: <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form.intended_return_date }}
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="ln_solid"></div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
+                                              <button type="submit" class="btn btn-primary">Return</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+    {% else %}
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                    <div class="x_title">
+       
+                        <h2>Return a Book </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                          </li>
+                        </ul>
+                        <div class="clearfix"></div>
+       
+                    </div>
+       
+                    {% if error_message %}
+
+                        <div class=" col-md-6 col-sm-6 col-xs-12 col-md-offset-5 red ">
+                            <strong> * &nbsp; {{ error_message }}</strong>
+                        </div>
+
+                    {% endif %}
+
+                    {% if success %}
+
+                        <div  class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6 green">
+                            <strong>Book(s) returned successfully !!</strong>
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="x_content">
+                        <br />
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{% url 'book_return' %}" method="post" id="issue">
+                                
+                            {% csrf_token %}
+                            
+                            <div class="form-group">
+                                
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="accn">Accn. No of Book: 
+                                    <span class="required">*</span>
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="ui-widget">
+                                        {{ form.accn }}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6">
+                                    <button type="submit" class="btn btn-primary">Go</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+             </div>
+        </div>
+      
+    {% endif %}
+
+{% endblock %}

@@ -4,15 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
-class book(models.Model):
-
-    title = models.CharField(max_length=80)
-    author = models.CharField(max_length=80)
-
-    def __str__(self):
-        return self.title
-
-
 class booking(models.Model):
 
     avaialability = models.BooleanField(default=False)
